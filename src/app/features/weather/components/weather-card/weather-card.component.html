@@ -1,0 +1,10 @@
+<div class="card border-dark mb-3">
+  <div class="card-header">{{ weatherInfo.date | date : "shortDate" }}</div>
+  <div class="card-body text-dark">
+    <h5 class="card-title" *ngIf="!editModeEnabled">{{ weatherInfo.temperature }}</h5>
+    <input type="text" *ngIf="editModeEnabled" [(ngModel)]="weatherInfo.temperature" class="form-control"/>
+    <p class="card-text" *ngIf="!editModeEnabled">{{ weatherInfo.description }}</p>
+    <input type="text" *ngIf="editModeEnabled" [(ngModel)]="weatherInfo.description" class="form-control"/>
+    <button class="btn btn-outline-primary" (click)="editModeEnabled = !editModeEnabled">Edit</button>
+  </div>
+</div>

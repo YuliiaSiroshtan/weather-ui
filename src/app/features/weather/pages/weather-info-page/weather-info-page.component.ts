@@ -18,8 +18,9 @@ export class WeatherInfoPageComponent {
         map((x) => {
           x.entities?.forEach((y) => {
             let item = new Weather();
-            item.date = y.date ?? new Date();
-            item.description = y.description ?? '';
+            item.date = y.date;
+            item.description = y.description;
+            item.temperature = y.temperature;
 
             this.weathers.push(item);
           });
