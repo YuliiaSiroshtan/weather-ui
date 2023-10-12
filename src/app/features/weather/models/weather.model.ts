@@ -1,4 +1,5 @@
 export class Weather {
-    date: Date = new Date();
-    description: string | null = null;
+    date?: Date;
+    description?: string;
+    temperature?: number;
 }
