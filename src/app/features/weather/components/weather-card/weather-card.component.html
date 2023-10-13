@@ -1,10 +1,53 @@
 <div class="card border-dark mb-3">
   <div class="card-header">{{ weatherInfo.date | date : "shortDate" }}</div>
-  <div class="card-body text-dark">
-    <h5 class="card-title" *ngIf="!editModeEnabled">{{ weatherInfo.temperature }}</h5>
-    <input type="text" *ngIf="editModeEnabled" [(ngModel)]="weatherInfo.temperature" class="form-control"/>
-    <p class="card-text" *ngIf="!editModeEnabled">{{ weatherInfo.description }}</p>
-    <input type="text" *ngIf="editModeEnabled" [(ngModel)]="weatherInfo.description" class="form-control"/>
-    <button class="btn btn-outline-primary" (click)="editModeEnabled = !editModeEnabled">Edit</button>
+  <div *ngIf="!editModeEnabled" class="card-body text-dark">
+    <h5 class="card-title">{{ weatherInfo.temperature }}</h5>
+    <p class="card-text">{{ weatherInfo.description }}</p>
+    <button
+      class="btn btn-outline-primary"
+      (click)="editModeEnabled = !editModeEnabled"
+    >
+      Edit
+    </button>
+  </div>
+  <div *ngIf="editModeEnabled" class="card-body text-dark">
+    <form
+      [formGroup]="weatherForm"
+      (ngSubmit)="editModeEnabled = !editModeEnabled; saveWeather()"
+    >
+      <input formControlName="temperature" type="text" class="form-control" />
+      <div
+        *ngIf="
+          weatherForm.controls.temperature.touched &&
+          weatherForm.controls.temperature.invalid
+        "
+        class="alert alert-danger"
+      >
+        <div *ngIf="weatherForm.controls.temperature.hasError('required')">
+          Temperature is required.
+        </div>
+      </div>
+      <input formControlName="description" type="text" class="form-control" />
+      <button class="btn btn-outline-primary" type="submit" [disabled]="weatherForm.invalid">Save</button>
+    </form>
   </div>
 </div>
+
+<!-- <div class="card border-dark mb-3">
+  <form>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div> -->
