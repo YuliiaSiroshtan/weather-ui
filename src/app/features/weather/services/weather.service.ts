@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ApiClient } from 'src/app/core/services/api-client.service';
+import {
+  ApiClient,
+  WeatherApiEntity,
+} from 'src/app/core/services/api-client.service';
+import { Weather } from '../models/weather.model';
 
 @Injectable({
   providedIn: 'root',
@@ -9,5 +13,15 @@ export class WeatherService {
 
   getAll() {
     return this.client.weathersGET();
+  }
+
+  update(weather: Weather) {
+    let weatherInfo = new WeatherApiEntity();
+    weatherInfo.id = weather.id;
+    weatherInfo.temperature = weather.temperature;
+    weatherInfo.description = weather.description;
+    weatherInfo.date = weather.date;
+
+    return this.client.weathersPUT(weatherInfo);
   }
 }
