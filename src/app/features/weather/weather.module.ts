@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WeatherComponent } from './weather.component';
 import { WeatherInfoPageComponent } from './pages/weather-info-page/weather-info-page.component';
@@ -21,6 +21,7 @@ import { WeatherCardComponent } from './components/weather-card/weather-card.com
     NgbModule,
     WeatherRoutingModule,
     FormsModule,
+    NgbDatepickerModule
   ],
   exports: [WeatherComponent],
 })
