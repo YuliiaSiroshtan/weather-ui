@@ -1,0 +1,14 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "files.eol": "\r\n",
+    "files.insertFinalNewline": true,
+    "prettier.endOfLine": "crlf"
+  }
+}

@@ -1,3 +1,3 @@
 export class StorageItemNames {
-    public static AccessToken = 'access_token';
+  public static AccessToken = 'access_token';
 }
