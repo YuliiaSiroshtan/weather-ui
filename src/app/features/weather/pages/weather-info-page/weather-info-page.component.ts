@@ -3,6 +3,7 @@ import { Weather } from '../../models/weather.model';
 import { WeatherService } from '../../services/weather.service';
 import { map } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { StorageItemNames } from 'src/app/shared/const/storage-item-names';
 
 @Component({
   selector: 'app-weather-info-page',
@@ -41,5 +42,15 @@ export class WeatherInfoPageComponent implements OnInit {
           },
         });
     }, 1000);
+  }
+
+  toggleAccessToken(): void {
+    const accessToken = localStorage.getItem(StorageItemNames.AccessToken);
+
+    if (accessToken) {
+      localStorage.removeItem(StorageItemNames.AccessToken);
+    } else {
+      localStorage.setItem(StorageItemNames.AccessToken, 'test12345');
+    }
   }
 }
