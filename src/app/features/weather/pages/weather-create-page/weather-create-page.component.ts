@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Weather } from '../../models/weather.model';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-weather-create-page',
@@ -17,13 +18,13 @@ export class WeatherCreatePageComponent {
     description: new FormControl('', [Validators.required]),
   });
 
-  showInternalServerError = false;
-
-  constructor(private weatherService: WeatherService, private router: Router) {}
+  constructor(
+    private weatherService: WeatherService,
+    private router: Router,
+    private toaster: ToastrService
+  ) {}
 
   addWeather() {
-    this.showInternalServerError = false;
-
     if (this.weatherCreateForm.invalid) {
       return;
     }
@@ -35,13 +36,15 @@ export class WeatherCreatePageComponent {
     weather.temperature = this.weatherCreateForm.controls.temperature.value!;
     weather.description = this.weatherCreateForm.controls.description.value!;
 
-    this.weatherService.add(weather).subscribe(
-      () => {
+    this.weatherService.add(weather).subscribe({
+      complete: () => {
+        this.toaster.success('Weather created successfully', 'Success');
         this.router.navigate(['/weather']);
       },
-      (error) => {
-        this.showInternalServerError = true;
-      }
-    );
+      error: (err) => {
+        this.toaster.error(err, 'Error');
+      },
+      next: () => {},
+    });
   }
 }
