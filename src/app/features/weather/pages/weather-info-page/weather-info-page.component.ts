@@ -43,14 +43,4 @@ export class WeatherInfoPageComponent implements OnInit {
         });
     }, 1000);
   }
-
-  toggleAccessToken(): void {
-    const accessToken = localStorage.getItem(StorageItemNames.AccessToken);
-
-    if (accessToken) {
-      localStorage.removeItem(StorageItemNames.AccessToken);
-    } else {
-      localStorage.setItem(StorageItemNames.AccessToken, 'test12345');
-    }
-  }
 }

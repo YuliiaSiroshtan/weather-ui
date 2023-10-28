@@ -4,8 +4,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { API_BASE_URL, ApiClient } from './services/api-client.service';
 import { environment } from 'src/environments/environment';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpAuthHeaderInterceptor } from './interceptors/http-auth-header.interceptor';
 
 @NgModule({
   declarations: [NavbarComponent],
@@ -15,11 +13,6 @@ import { HttpAuthHeaderInterceptor } from './interceptors/http-auth-header.inter
     {
       provide: API_BASE_URL,
       useValue: environment.baseUrl,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpAuthHeaderInterceptor,
-      multi: true,
     },
   ],
   imports: [CommonModule, RouterModule],
